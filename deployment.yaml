@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+    name: nginx
+spec:
+  template:
+    metadata:
+      labels:
+        app: nginx
+      name: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        env:
+          - name: DEMO_GREETING
+            value: "Hello from the environment"
+          - name: DEMO_FAREWELL
+            value: "Such a sweet sorrow"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  strategy:
+   type: RollingUpdate

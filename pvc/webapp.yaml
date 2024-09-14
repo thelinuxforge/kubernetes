@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+spec:
+  containers:
+  - name: event-simulator
+    image: nginx
+    env:
+    - name: LOG_HANDLERS
+      value: file
+    volumeMounts:
+    - mountPath: /root/K8S-class/class-3
+      name: log-volume
+  volumes:
+  - name: log-volume
+    hostPath:
+      # directory location on host
+      path: /var/www/html
+      # this field is optional
+      type: Directory

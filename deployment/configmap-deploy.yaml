@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: nginx
+  labels:
+    name: nginx
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels: 
+        name: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+        - name: my-confimap
+          mountPath: "/etc/foo"
+          readOnly: true
+        env:
+          - configMapRef:
+            name: nginx-cm
+      volumes:
+      - name: my-confimap
+        configMap:
+          name: game-demo
+  replicas: 1
+  selector:
+    matchLabels:
+      name: nginx
+  strategy:
+   type: RollingUpdate
+  

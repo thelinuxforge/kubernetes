@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-new-namespace
+  labels:
+    environment: development
+    project: my-application

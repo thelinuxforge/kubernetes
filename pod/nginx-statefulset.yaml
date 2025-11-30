@@ -21,13 +21,6 @@ spec:
         env:
          - name: JAVA
            value: "1.9"
-        volumeMounts:
-          - name: foo
-            mountPath: "/etc/foo"
-            readOnly: true
-      volumes:
-        - name: foo
-          configMap:
+        envFrom:
+         - configMapRef:
             name: game-demo
-
-

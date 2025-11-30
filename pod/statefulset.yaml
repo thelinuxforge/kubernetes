@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: default
+  name: nginx
+  labels:
+    name: nginx
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels: 
+        name: backend
+    spec:
+      containers:
+      - image: nginx:1.26.2
+        name: nginx  
+  replicas: 1
+  selector:
+    matchLabels:
+      name: backend
+  

@@ -25,9 +25,13 @@ spec:
           - name: foo
             mountPath: "/etc/foo"
             readOnly: true
+          - name: claim-log-1
+            mountPath: "/var/log/nginx"
       volumes:
         - name: foo
           configMap:
             name: game-demo
-
+        - name: claim-log-1
+          persistentVolumeClaim:
+            claimName: claim-log-1
 

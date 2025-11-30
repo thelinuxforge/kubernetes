@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: linux-forge
+data:
+  APP_NAME: "myapp"
+  APP_ENV: "production"
+  APP_DEBUG: "false"
+  DB_HOST: "localhost-12345"
+  DB_PORT: "5432"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: linux-forge
+  name: nginx
+  labels:
+    name: nginx
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels: 
+        name: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        envFrom:
+        - configMapRef:
+            name: app-config
+  replicas: 1
+  selector:
+    matchLabels:
+      name: nginx

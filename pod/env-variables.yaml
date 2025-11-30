@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    name: nginx
+    name: nginx
+spec:
+  template:
+    metadata:
+      labels:
+        name: nginx
+      name: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        env:
+          - name: env
+            value: "dev"
+          - name: APP_COLOR
+            value: "white"
+      - image: busybox
+        name: busybox
+        env:
+          - name: env
+            value: "prod"
+  replicas: 1
+  selector:
+    matchLabels:
+      name: nginx
+  strategy:
+   type: RollingUpdate
